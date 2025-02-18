@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React, { FC, useState, useEffect } from "react";
+import NavItems from "./navItems";
+import { ThemeSwitcher } from "../context/themeSwitcher";
 
 type Props = {
   open: boolean;
@@ -7,7 +9,7 @@ type Props = {
   activeItem: number;
 };
 
-const Navbar: FC<Props> = (props) => {
+const Navbar: FC<Props> = ({activeItem}) => {
   const [active, setActiveItem] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
 
@@ -41,6 +43,10 @@ const Navbar: FC<Props> = (props) => {
               >
                 LearnSys
               </Link>
+            </div>
+            <div  className="flex items-center">
+              <NavItems activeItem={activeItem} isMobile={false}/>
+              <ThemeSwitcher/>
             </div>
           </div>
         </div>
