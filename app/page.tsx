@@ -2,6 +2,7 @@
 import React, { FC, useState } from "react";
 import { Heading } from "./utils/heading";
 import Navbar from "./components/navbar";
+import HeroSection from "./components/heroSection/heroSection"
 
 interface Props {}
 
@@ -16,6 +17,7 @@ const App: FC<Props> = ({  }) => {
         keywords="Programming,MERN,Redux"
       />
       <Navbar open={open} setOpen={setOpen} activeItem={activeItem} />
+      <HeroSection/>
     </>
   );
 };
