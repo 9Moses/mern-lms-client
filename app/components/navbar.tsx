@@ -3,14 +3,20 @@ import React, { FC, useState, useEffect } from "react";
 import NavItems from "./navItems";
 import { ThemeSwitcher } from "../context/themeSwitcher";
 import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
+import CustomModal from "../utils/customModal";
+import Login from "./auth/login";
+import SignUp from "./auth/signUp";
+import VerifyToken from "./auth/verifyToken";
 
 type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
   activeItem: number;
+  route: string;
+  setRoute: (route: string) => void;
 };
 
-const Navbar: FC<Props> = ({ activeItem, setOpen }) => {
+const Navbar: FC<Props> = ({ activeItem, setOpen, open, route, setRoute }) => {
   const [active, setActiveItem] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
 
@@ -66,7 +72,10 @@ const Navbar: FC<Props> = ({ activeItem, setOpen }) => {
               <HiOutlineUserCircle
                 size={25}
                 className="hidden 800px:block cursor-pointer dark:text-white text-black"
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                  setOpen(true);
+                  console.log("click");
+                }}
               />
             </div>
           </div>
@@ -90,6 +99,45 @@ const Navbar: FC<Props> = ({ activeItem, setOpen }) => {
           )}
         </div>
       </div>
+      {route === "Sign-Up" && (
+        <>
+          {open && (
+            <CustomModal
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={SignUp}
+            />
+          )}
+        </>
+      )}
+      {route === "Login" && (
+        <>
+          {open && (
+            <CustomModal
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={Login}
+            />
+          )}
+        </>
+      )}
+      {route === "verification" && (
+        <>
+          {open && (
+            <CustomModal
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={VerifyToken}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };
